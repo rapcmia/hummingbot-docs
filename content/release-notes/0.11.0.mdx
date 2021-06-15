@@ -6,19 +6,19 @@ title: "Version 0.11.0"
 
 ## 📝 Introducing the Developer Manual
 
-![](/assets/img/developer-manual.png)
+![](/img/developer-manual.png)
 
 We have created a new section in our docs for developers who want to contribute to Hummingbot and extend its capabilities.
 
-Initially, it's focused on helping users understand how Hummingbot strategies work, especially the pure market making strategy.
+Initially, it's focused on helping users understand how Hummingbot strategies work, especially the pure market-making strategy.
 
 Over time, we will add more content to the other sections.
 
 ## 🤖 New strategy: `simple_trade`
 
-![](/assets/img/simple_trade.png)
+![](/img/simple_trade.png)
 
-We added a new strategy: [Simple Trade](https://docs.hummingbot.io/developers/tutorial/simple-trade/).
+We added a new strategy: [Simple Trade](/developer/build-strategy/#simple-trade-strategy).
 
 This strategy gives users a starter template upon which to customize their own strategies.
 
@@ -26,7 +26,7 @@ This strategy gives users a starter template upon which to customize their own s
 
 Liquidity Bounty participants can now use the `bounty --restore-id` command to recover their registration info.
 
-If you accidentally deleted your Docker container and lost your `conf_liquidity_bounty.yml` file, you can now recover it and conttinue to earn rewards.
+If you accidentally deleted your Docker container and lost your `conf_liquidity_bounty.yml` file, you can now recover it and continue to earn rewards.
 
 ## 📊 CoinGecko data feed integration
 
@@ -38,14 +38,14 @@ We have integrated the price feed from [CoinGecko](https://www.coingecko.com/en)
 
 Thanks to everyone who reported bugs! **Note that we pay bug bounties to anyone who reports a bug that we end up fixing.**
 
-- Bots will now respect the minimum order size on IDEX and not try to place orders smaller than minimum order size
+- Bots will now respect the minimum order size on IDEX and not try to place orders smaller than the minimum order size
 - Refactored the strategy classes to move redundant code to the strategy base classes
 - Added logic to take into account in-flight orders when determining whether a bot has sufficient balance to place orders
 - Fixed bugs related to using the Telegram integration
 
 ## 🚀 Coming soon
 
-Here's what we currently working on that we expect to ship in the next month:
+Here's what we are currently working on that we expect to ship in the next month:
 
 - Paper trading mode
 - Liquidity bounty leaderboard

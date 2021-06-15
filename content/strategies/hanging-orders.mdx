@@ -3,6 +3,8 @@ title: Hanging Orders
 description: Info on hanging orders
 ---
 
+import Prompt from "../../src/components/Prompt";
+
 **Updated as of `v0.28.0`**
 
 This feature keeps orders "hanging" (or not cancelled and remaining on the order book) if a matching order has been filled on the other side of the order book (bid vs. ask order books).
@@ -13,23 +15,31 @@ When enabled, the orders on the side opposite to the filled orders remains activ
 
 ** Prompt: **
 
-<div style={{ padding: "10px 20px", backgroundColor: "#1c1c1c" }}>
-  <font color="#20a26a">Do you want to enable hanging orders? (Yes/No)</font>
-</div>
+<Prompt
+  prompt="Do you want to enable hanging orders? (Yes/No)"
+  response=">>> Yes"
+/>
 
 ## `hanging_orders_cancel_pct`
 
-Cancels the hanging orders when their spread goes above this value.
+Cancels the hanging orders when their spread goes above this value. Note that no other parameter can cancel hanging orders other than `hanging_orders_cancel_pct`.
 
 ** Prompt: **
 
-<div style={{ padding: "10px 20px", backgroundColor: "#1c1c1c" }}>
-  <font color="#20a26a">
-    At what spread percentage (from mid price) will hanging orders be canceled?
-  </font>
-</div>
+<Prompt
+  prompt="At what spread percentage (from mid price) will hanging orders be canceled?"
+  response=">>> "
+/>
 
 ## How It Works
+
+Hanging orders is a function that instructs Hummingbot to treat buys and sells of the same order as a pair. If one side gets filled, the bot keeps the other side of the pairing, creating the possibility of that side to eventually get filled:
+
+![](img/hanging-orders.png)
+
+In the example above, the buy order for the first pair was filled. But since hanging orders mode was enabled, the original sell order from the first pair is not cancelled during the refresh cycle (period 2) and remains outstanding. Meanwhile, the bot continues to create new orders (see periods 2 through 5). In the example, prices changed direction and eventually at some point, the hanging sell order was filled around period 5.
+
+The benefit of this strategy is that it creates the possibility of the pairings to be “completed” and balanced.
 
 Typically, orders are placed as pairs in single order mode (1 buy and 1 sell order), and when a buy or sell order is filled, the other order is cancelled. The parameter `hanging_orders_enabled` allows Hummingbot to leave the order on the other side hanging (not cancelled) whenever one side is filled.
 
